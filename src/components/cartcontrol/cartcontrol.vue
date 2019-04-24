@@ -29,7 +29,7 @@ export default {
       }
       console.log('desc');
       // event.stopPropagation(); 父级div有点击事件，需要停止冒泡
-      // event.stopPropagation();
+      event.stopPropagation();
     },
     addCart() {
       // 设置延时，以保证平抛小球到购车车后购物车的数量再加1
@@ -42,7 +42,7 @@ export default {
       }, 1200);
       // event.stopPropagation(); 父级div有点击事件，需要停止冒泡
       // 为什么用event.preventDefault()不生效？？
-      // event.stopPropagation();
+      event.stopPropagation();
       this.$emit('cart-add', event.target);
     }
   }

@@ -23,7 +23,8 @@
           <ul>
             <li v-for="(food, index1) in item.foods"
                 v-bind:key="index1"
-            class="food-item border-1px">
+            class="food-item border-1px"
+            @click="selectFood(food, $event)">
               <div class="icon">
                 <img :src="food.icon" width="57" height="57">
               </div>
@@ -53,6 +54,8 @@
       :delivery-price="seller.deliveryPrice"
       :min-price="seller.minPrice"
     ></shop-cart>
+    <food :food="selectedFood"
+    ref="food"></food>
   </div>
 </template>
 
@@ -60,6 +63,8 @@
 import BScroll from 'better-scroll';
 import shopCart from '../shopcart/shopcart';
 import cartControl from '../cartcontrol/cartcontrol';
+import food from '../food/food';
+
 export default {
   name: 'goods',
   props: {
@@ -69,14 +74,16 @@ export default {
   },
   components: {
     'shop-cart': shopCart,
-    'cart-control': cartControl
+    'cart-control': cartControl,
+    food
   },
   data() {
     return {
       classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
       goods: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      selectedFood: {}
     };
   },
   created () {
@@ -123,6 +130,10 @@ export default {
       this.$nextTick(() => {
         this.$refs.shopCart.drop(el); // 调用shopcart组件的drop()函数
       });
+    },
+    selectFood(food, e) {
+      this.selectedFood = food;
+      this.$refs.food.show();
     }
   },
   computed: {
@@ -267,19 +278,19 @@ export default {
             }
           }
           .price {
-            font-weight: 700;
-            font-size: 24px;
-            .now {
-              margin-right: 18px;
-              font-size: 14px;
-              color: rgb(240, 20, 20);
-            }
-            .old {
-              text-decoration: line-through;
-              font-size: 10px;
-              color: rgb(147, 153, 159);
-            }
-          }
+             font-weight: 700;
+             font-size: 24px;
+             .now {
+               margin-right: 18px;
+               font-size: 14px;
+               color: rgb(240, 20, 20);
+             }
+             .old {
+               text-decoration: line-through;
+               font-size: 10px;
+               color: rgb(147, 153, 159);
+             }
+           }
           .cartcontrol-wrapper {
             position: absolute;
             right: 0;
