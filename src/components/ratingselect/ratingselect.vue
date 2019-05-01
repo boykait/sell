@@ -63,7 +63,7 @@ export default {
     },
     toggleContent() {
       this.onlyContent = !this.onlyContent;
-      this.$emit('ratingType-toggleContent', type);
+      this.$emit('ratingType-toggleContent', this.onlyContent);
     }
   },
   computed: {
